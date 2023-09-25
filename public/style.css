@@ -20,9 +20,6 @@ body {
 p {
     text-align: center;
 }
-header{
-    text-align: center;
-}
 .formRow {
     align-items: center;
     display: flex;

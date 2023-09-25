@@ -68,8 +68,5 @@
         "preu": 0.55,
         "descripcio": "Spinach (Spinacia oleracea) is a leafy green flowering plant native to central and Western Asia. It is of the order Caryophyllales, family Amaranthaceae, subfamily Chenopodioideae. Its leaves are a common edible vegetable consumed either fresh, or after storage using preservation techniques by canning, freezing, or dehydration. It may be eaten cooked or raw, and the taste differs considerably; the high oxalate content may be reduced by steaming.",
         "imatge": "../public/spinachs.png"
-    },
-    {
-        "id": "b"
     }
 ]
