@@ -12,6 +12,16 @@ const { v4: uuidv4 } = require('uuid')
 const storage = multer.memoryStorage() 
 const upload = multer({ storage: storage })
 
+// Ruta para la página de inicio
+app.get('/', (req, res) => {
+    res.send('Página de Inicio');
+  });
+  
+  // Ruta para la página de añadir
+  app.get('/add', (req, res) => {
+    res.send('Página de Añadir');
+  });
+
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
