@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<!-- Aquest arxiu rep una llista amb noms de fruites. -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!-- A la capçalera no li fa falta cap informació, passem un objecte buit. -->
+        <%- include('../partials/head', {}); %>
+        <title>Fruit</title>
+    </head>
+    <body>
+        <!-- Al parcial de 'itemBody' li fa falta la informació que hem rebut -->
+        <%- include('../partials/searchBody', { llista: llista }); %>
+    </body>
+</html>

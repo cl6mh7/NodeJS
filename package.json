@@ -1,0 +1,21 @@
+{
+  "name": "proyecte",
+  "version": "1.0.0",
+  "description": "AWS2-MPDUAL UF4 NodeJS 23-24 | Proyecte.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "development": "nodemon ./app.js",
+    "app": "forever ./app.js"
+  },
+  "author": "Claudia Moyano Herrerias",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "forever": "^0.14.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.1",
+    "uuid": "^9.0.1"
+  }
+}

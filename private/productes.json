@@ -1,0 +1,81 @@
+[
+    {
+        "id": 1,
+        "nom": "Banana",
+        "preu": 0.85,
+        "descripcio": "The banana, also known as plantain, ripe banana, guineo, cambur or gualele, is an edible fruit of several types of large herbaceous plants of the genus Musa. These large plants that look like small trees are called banana trees, banana trees, banana trees, plantains or banana trees.",
+        "imatge": "../public/bananas.jpg"
+    },
+    
+    {
+        "id": 2,
+        "nom": "Cherries",
+        "preu": 0.80,
+        "descripcio": "A cherry is the fruit of many plants of the genus Prunus, and is a fleshy drupe (stone fruit).",
+        "imatge": "../public/cherries.png"
+    },
+
+    {
+        "id": 3,
+        "nom": "Apples",
+        "preu": 0.70,
+        "descripcio": "An apple is a round, edible fruit produced by an apple tree (Malus domestica). Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus. The tree originated in Central Asia, where its wild ancestor, Malus sieversii, is still found.",
+        "imatge": "../public/apples.jpeg"
+    },
+
+    {
+        "id": 4,
+        "nom": "Cherimoya",
+        "preu": 0.90,
+        "descripcio": "The cherimoya (Annona cherimola), also spelled chirimoya and called chirimuya by the Inca people, is a species of edible fruit-bearing plant in the genus Annona, from the family Annonaceae, which includes the closely related sweetsop and soursop.",
+        "imatge": "../public/cherimoya.png"
+    },
+
+    {
+        "id": 5,
+        "nom": "Pears",
+        "preu": 0.50,
+        "descripcio": "Pears are fruits produced and consumed around the world, growing on a tree and harvested in late summer into mid-autumn. The pear tree and shrub are a species of genus Pyrus /ˈpaɪrəs/, in the family Rosaceae, bearing the pomaceous fruit of the same name. Several species of pears are valued for their edible fruit and juices, while others are cultivated as trees.",
+        "imatge": "../public/pears.jpg"
+    },
+
+    {
+        "id": 6,
+        "nom": "Starfruits",
+        "preu": 1.75,
+        "descripcio": "Carambola, also known as star fruit, is the fruit of Averrhoa carambola, a species of tree native to tropical Southeast Asia.[1][2][3] The edible fruit has distinctive ridges running down its sides (usually 5–6).[1] When cut in cross-section, it resembles a star, giving it the name of star fruit.[1][2] The entire fruit is edible, usually raw, and may be cooked or made into relishes, preserves, garnish, and juices.[1] It is commonly consumed in Southeast Asia, South Asia, the South Pacific, Micronesia, parts of East Asia, the United States, parts of Latin America, and the Caribbean. The tree is cultivated throughout tropical areas of the world.",
+        "imatge": "../public/starfruits.jpg"
+    },
+
+    {
+        "id": 7,
+        "nom": "Grapes",
+        "preu": 0.50,
+        "descripcio": "A grape is a fruit, botanically a berry, of the deciduous woody vines of the flowering plant genus Vitis. Grapes are a non-climacteric type of fruit, generally occurring in clusters. The cultivation of grapes began perhaps 8,000 years ago, and the fruit has been used as human food over history. Eaten fresh or in dried form (as raisins, currants and sultanas), grapes also hold cultural significance in many parts of the world, particularly for their role in winemaking. Other grape-derived products include various types of jam, juice, vinegar and oil.",
+        "imatge": "../public/grapes.jpg"
+    },
+
+    {
+        "id": 8,
+        "nom": "Potatoes",
+        "preu": 0.85,
+        "descripcio": "The potato is a starchy food, a tuber of the plant Solanum tuberosum and is a root vegetable native to the Americas. The plant is a perennial in the nightshade family Solanaceae.",
+        "imatge": "../public/potatoes.jpg"
+    },
+
+    {
+        "id": 9,
+        "nom": "Celeries",
+        "preu": 1.10,
+        "descripcio": "Celery (Apium graveolens) is a marshland plant in the family Apiaceae that has been cultivated as a vegetable since antiquity. Celery has a long fibrous stalk tapering into leaves. Depending on location and cultivar, either its stalks, leaves or hypocotyl are eaten and used in cooking. Celery seed powder is used as a spice.",
+        "imatge": "../public/celeries.png"
+    },
+
+    {
+        "id": 10,
+        "nom": "Spinacs",
+        "preu": 0.55,
+        "descripcio": "Spinach (Spinacia oleracea) is a leafy green flowering plant native to central and Western Asia. It is of the order Caryophyllales, family Amaranthaceae, subfamily Chenopodioideae. Its leaves are a common edible vegetable consumed either fresh, or after storage using preservation techniques by canning, freezing, or dehydration. It may be eaten cooked or raw, and the taste differs considerably; the high oxalate content may be reduced by steaming.",
+        "imatge": "../public/spinachs.png"
+    }
+]
