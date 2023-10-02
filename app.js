@@ -12,20 +12,42 @@ const { v4: uuidv4 } = require('uuid')
 const storage = multer.memoryStorage() 
 const upload = multer({ storage: storage })
 
-// Ruta para la página de inicio
-app.get('/', (req, res) => {
-    res.send('Página de Inicio');
-  });
-  
-  // Ruta para la página de añadir
-  app.get('/add', (req, res) => {
-    res.send('Página de Añadir');
-  });
 
 app.set("view engine", "ejs");
+app.set('views', __dirname + '/views')
 
 app.use(express.static("public"));
+// Retornar una pàgina dinàmica de item
+app.get('/item', getItem)
+async function getItem (req, res) {
+   let dades = {}
+   res.render('sites/item', dades)
+}
 
+
+
+// Ruta para la página de inicio
+app.get('/', async (req, res) => {
+    try {
+        const { id} = req.query;
+        const data = await fs.readFile('./private/productes.json', 'utf-8');
+        const products = JSON.parse(data);
+
+        let filteredProducts = products;
+
+        if (id) {
+            filteredProducts = filteredProducts.filter(products => products.id === id);
+        }
+
+        // Ordenar la lista de productos por ID
+        filteredProducts.sort((a, b) => a.id - b.id);
+
+        res.render('inici.ejs', { products: filteredProducts });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
 app.post('/addItem', upload.array('files'), addItem)
 async function addItem (req, res) {
 let arxiu = "./private/productes.json"
@@ -34,6 +56,7 @@ try {
     // Llegir el fitxer JSON
     let dadesArxiu = await fs.readFile(arxiu, { encoding: 'utf8'})
     let dades = JSON.parse(dadesArxiu)
+    console.log(dades);
 
     // Guardem la imatge a la carpeta 'public' amb un nom únic.
     if (postData.files && postData.files.length > 0) {
@@ -52,10 +75,44 @@ try {
         dades.push(postData) // Afegim el nou objecte (que ja té el nou nom d’imatge)
         let textDades = JSON.stringify(dades, null, 4) // Ho transformem a cadena de text (per guardar-ho en un arxiu)
         await fs.writeFile(arxiu, textDades, { encoding: 'utf8'}) // Guardem la informació a l’arxiu
+        res.render('inici.ejs');
         res.send(`The data, ${textDades}, has been added.`)
     } catch (error) { console.error(error)
         res.send('Error when affecting data.') }
 }
+
+  
+  // Ruta para la página de añadir
+  app.get('/add', (req, res) => {
+    res.render('add.ejs');
+  });
+  app.get('/edit', (req, res) => {
+    const id = req.query.id; // Obtiene el valor de 'id' desde la consulta URL (?id=X)
+    // Renderiza la vista de edición pasando el 'id' como contexto
+    res.render('edit.ejs', { id }); // Reemplaza 'editar.ejs' con el nombre real de tu vista para editar
+});
+
+  app.get('/delete', (req, res) => {
+    const id = req.query.id; // Obtiene el valor de 'id' desde la consulta URL (?id=X)
+    // Renderiza la vista de confirmación de borrado pasando el 'id' como contexto
+    res.render('delete.ejs', { id }); // Reemplaza 'confirmarBorrado.ejs' con el nombre real de tu vista de confirmación de borrado
+});
+  app.post('/actionDelete', (req, res) => {
+    const id = req.query.id; // Obtiene el valor de 'id' desde la consulta URL (?id=X)
+    
+    // Realiza la acción de borrado aquí usando el 'id' recibido
+    
+    // Redirige a la página de inicio después de borrar
+    res.redirect('/');
+});
+
+
+
+
+
+
+
+
 
 async function getPostObject (req) {
     return new Promise(async (resolve, reject) => {
@@ -82,7 +139,32 @@ async function getPostObject (req) {
             }
         } else { objPost[key] = value }}
         resolve(objPost)})
-}    
+} 
+
+
+
+
+// Retornar una pàgina dinàmica de item /actionEdit
+app.get('/item', getItem)
+async function getItem (req, res) {
+    let arxiu = "./private/productes.json"
+    let dadesArxiu = await fs.readFile(arxiu, { encoding: 'utf8'})
+    let dades = JSON.parse(dadesArxiu)
+    console.log(dades)
+    let query = url.parse(req.url, true).query;
+
+    // Buscar la nau per nom
+    let infoFruit = dades.find(fruit => (fruit.nom == query.nom))
+    if (infoFruit) {
+        // Retornar la pàgina segons la nau trobada
+        // Fa servir la plantilla 'sites/item.ejs'
+        res.render('sites/fruits', { infoFruit: infoFruit })
+    } else {
+        res.send('Paràmetres incorrectes')
+    }
+}
+
+
 
 // Activar servidor.
 app.listen(port, appListen);
