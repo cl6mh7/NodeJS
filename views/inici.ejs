@@ -9,11 +9,13 @@
             <%- include('partials/header'); %>
         </header>
         <h1>Lista de Productos</h1>
+        <form action="edit.ejs" method="get">
         <ul>
             <% products.forEach(products => { %>
-                <li><%= products.id %>- <%= products.nom %></li>
+                <li><a href="/edit?id=<%= products.id %>"><%= products.id %>- <%= products.nom %></a></li>
             <% }); %>
         </ul>
+    </form>
     </div>
 </body>
 

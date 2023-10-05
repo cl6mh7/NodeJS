@@ -1,6 +1,4 @@
-<h1>Pagina de editar</h1>
 <!DOCTYPE html>
-
 <!-- Aquest arxiu rep una llista amb noms de fruites. -->
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -9,11 +7,12 @@
         <title>Fruit</title>
     </head>
     <body>
-        <div class = "formulari">
+        <div class = "formulari" >
             <header >
                 <%- include('partials/header'); %>
             </header>
-            <p>Modifivar producte:</p>
-            <%- include('partials/fruitsBody'); %>
+            <p>Modificar producte:</p>
+            <%- include('partials/itemBody', { infoFruit: infoFruit }); %>
+
         </div>
     </body>
