@@ -1,4 +1,5 @@
-body {
+/* CSS modificado para hacer que el contenido se vea un 30% más grande y sin barras de desplazamiento */
+html, body {
     font-family: "Open Sans", sans-serif;
     margin: 0;
     user-select: none;
@@ -6,36 +7,41 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-.formulari {
+    font-size: 19px;
+  }
+  
+  .formulari {
     background-color: rgb(199, 222, 230);
     display: flex;
     flex-direction: column;
     border: 1px solid black;
-    max-width: 50%;
-    padding: 20px;
-}
+    max-width: 100%; /* Ancho máximo del formulario */
+    padding: 40px;
 
-p {
+  }
+  
+  p {
     text-align: center;
-}
-header{
+  }
+  
+  header {
     text-align: center;
-}
-.formRow {
+  }
+  
+  .formRow {
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 10px;
     max-width: 300px;
-}
-
-.formRow:first-child {
+  }
+  
+  .formRow:first-child {
     margin-top: 25px;
-}
-
-.formRow:last-child {
+  }
+  
+  .formRow:last-child {
     justify-content: flex-end;
-}
+  }
+  

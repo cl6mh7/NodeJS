@@ -56,7 +56,6 @@ async function addItem(req, res) {
     // Llegir el fitxer JSON
     let dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
     let dades = JSON.parse(dadesArxiu);
-    console.log(dades);
 
     // Guardem la imatge a la carpeta 'public' amb un nom únic.
     if (postData.files && postData.files.length > 0) {
@@ -82,6 +81,66 @@ async function addItem(req, res) {
     res.send("Error when affecting data.");
   }
 }
+
+// Retornar una pàgina dinàmica de item /actionEdit
+app.get("/edit", getItem);
+async function getItem(req, res) {
+  let arxiu = "./private/productes.json";
+  let dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
+  let dades = JSON.parse(dadesArxiu);
+  let query = url.parse(req.url, true).query;
+  
+  // Buscar el producto por id
+  let infoFruit = dades.find((fruit) => fruit.id == query.id);
+  console.log("Consola -------->"+ infoFruit);
+
+  if (infoFruit) {
+    // Retornar la página según el producto encontrado
+    res.render("edit.ejs", { id: query.id, infoFruit });
+  } else {
+    res.send("Parámetros incorrectos");
+  }
+}
+
+app.post("/actionEdit", upload.array("files"), async (req, res) => {
+  try {
+    const postData = await getPostObject(req);
+    const id = postData.id; // Obtener el ID del producto desde el formulario
+    // Leer los datos actuales de los productos desde el archivo JSON
+    const arxiu = "./private/productes.json";
+    const dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
+    const dades = JSON.parse(dadesArxiu);
+    let query = url.parse(req.url, true).query;
+
+    // Buscar el producto por id
+    let infoFruit = dades.find((fruit) => fruit.id == query.id);
+    console.log("Consola -------->"+ infoFruit);
+    
+    if (!infoFruit) {
+      // Redirigir al usuario a la página de inicio si el producto no se encuentra
+      res.status(404).send('ID no encontrado en la base de datos');
+      return;
+    }
+
+    // Actualizar los datos del producto con los datos del formulario
+    infoFruit.nom = postData.nombre || infoFruit.nom;
+    infoFruit.preu = postData.precio || infoFruit.preu;
+    infoFruit.descripcio = postData.descripcion || infoFruit.descripcio;
+
+    // Guardar la lista actualizada de productos en el archivo JSON
+    await fs.writeFile(arxiu, JSON.stringify(dades, null, 4), "utf8");
+
+    // Redirigir al usuario a la página de inicio (inici.ejs) después de editar
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error interno del servidor");
+  }
+});
+
+
+
+
 
 async function getPostObject(req) {
   return new Promise(async (resolve, reject) => {
@@ -115,30 +174,16 @@ async function getPostObject(req) {
   });
 }
 
-// Retornar una pàgina dinàmica de item /actionEdit
-app.get("/edit", getItem);
-async function getItem(req, res) {
-  let arxiu = "./private/productes.json";
-  let dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
-  let dades = JSON.parse(dadesArxiu);
-  console.log(dades);
-  let query = url.parse(req.url, true).query;
 
-  // Buscar el producto por id
-  let infoFruit = dades.find((fruit) => fruit.id == query.id);
-  if (infoFruit) {
-    // Retornar la página según el producto encontrado
-    res.render("edit.ejs", { id: query.id, infoFruit });
-  } else {
-    res.send("Parámetros incorrectos");
-  }
-}
+
+
+
 
 // Ruta para la acción de edición de un producto
 app.get("/item", getItemForItemRoute);
 async function getItemForItemRoute(req, res) {
   let dades = {};
-  res.render("edit.ejs", dades);
+
 }
 
 
@@ -163,6 +208,7 @@ async function actionEdit(req, res) {
 */
 app.get("/delete", (req, res) => {
   const id = req.query.id; // Obtiene el valor de 'id' desde la consulta URL (?id=X)
+  console.log(id);
   // Renderiza la vista de confirmación de borrado pasando el 'id' como contexto
   res.render("delete.ejs", { id }); // Reemplaza 'confirmarBorrado.ejs' con el nombre real de tu vista de confirmación de borrado
 });
