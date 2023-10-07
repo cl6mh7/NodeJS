@@ -114,8 +114,6 @@ app.post("/actionEdit", upload.array("files"), async (req, res) => {
 
     // Buscar el producto por id
     let infoFruit = dades.find((fruit) => fruit.id == query.id);
-    console.log("Consola -------->"+ infoFruit);
-    
     if (!infoFruit) {
       // Redirigir al usuario a la página de inicio si el producto no se encuentra
       res.status(404).send('ID no encontrado en la base de datos');
@@ -138,7 +136,65 @@ app.post("/actionEdit", upload.array("files"), async (req, res) => {
   }
 });
 
+// Ruta para la confirmación de borrado
+app.get("/delete", getDeleteConfirmation);
+async function getDeleteConfirmation(req, res) {
+  try {
+    const { id } = req.query;
+    const arxiu = "./private/productes.json";
+    const dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
+    const dades = JSON.parse(dadesArxiu);
+    console.log("Consola ------> " + dades)
+    const infoFruit = dades.find((fruit) => fruit.id == id);
+    
 
+    if (infoFruit) {
+      // Renderiza la vista de confirmación de borrado con los datos del producto
+      res.render("delete.ejs", { id, infoFruit });
+    } else {
+      res.send("Producto no encontrado");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error interno del servidor");
+  }
+}
+
+// Ruta para la acción de eliminación de un producto
+app.post("/actionDelete", deleteProduct);
+async function deleteProduct(req, res) {
+  try {
+    const { id } = req.query; // Obtener el ID del producto desde la consulta URL (?id=X)
+
+    // Leer el archivo JSON de productos
+    const data = await fs.readFile("./private/productes.json", "utf-8");
+    const products = JSON.parse(data);
+    console.log("Consola actionDelete ------>" + products);
+
+    // Buscar el índice del producto por ID
+    const productIndex = products.findIndex((product) => product.id == id);
+
+    if (productIndex >= 0) {
+      // Eliminar el producto encontrando por su índice
+      products.splice(productIndex, 1);
+
+      // Guardar la lista actualizada de productos en el archivo JSON
+      await fs.writeFile(
+        "./private/productes.json",
+        JSON.stringify(products, null, 4),
+        "utf8"
+      );
+
+      // Redirigir al usuario a la página de inicio después de borrar
+      res.redirect("/");
+    } else {
+      res.send("Producto no encontrado");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error interno del servidor");
+  }
+}
 
 
 
@@ -174,53 +230,12 @@ async function getPostObject(req) {
   });
 }
 
-
-
-
-
-
 // Ruta para la acción de edición de un producto
 app.get("/item", getItemForItemRoute);
 async function getItemForItemRoute(req, res) {
   let dades = {};
-
 }
 
-
-/*app.post("/actionEdit", upload.array("files"), actionEdit);
-async function actionEdit(req, res) {
-  try {
-    const { id } = req.query; // Obtiene el valor de 'id' desde la consulta URL (?id=X)
-    const postData = await getPostObject(req);
-
-    // Aquí deberías tener la lógica para cargar el producto con el ID especificado,
-    // aplicar las modificaciones según los datos recibidos del formulario,
-    // incluyendo la posible actualización de la foto si se ha proporcionado una nueva.
-
-    // Después de editar el producto, redirige al usuario a la página de edición ('edit.ejs')
-    // y pasa los datos del producto editado a la vista.
-    res.render("edit.ejs", { id, infoFruit: productoEditado }); // Reemplaza 'productoEditado' con los datos del producto editado.
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error interno del servidor");
-  }
-}
-*/
-app.get("/delete", (req, res) => {
-  const id = req.query.id; // Obtiene el valor de 'id' desde la consulta URL (?id=X)
-  console.log(id);
-  // Renderiza la vista de confirmación de borrado pasando el 'id' como contexto
-  res.render("delete.ejs", { id }); // Reemplaza 'confirmarBorrado.ejs' con el nombre real de tu vista de confirmación de borrado
-});
-app.post("/actionDelete", (req, res) => {
-  const id = req.query.id; // Obtiene el valor de 'id' desde la consulta URL (?id=X)
-
-  // Realiza la acción de borrado aquí usando el 'id' recibido
-
-  // Redirige a la página de inicio después de borrar
-  res.redirect("/");
-});
-// Retornar una pàgina dinàmica de item
 // Activar servidor.
 app.listen(port, appListen);
 function appListen() {

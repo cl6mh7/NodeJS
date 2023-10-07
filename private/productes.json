@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "nom": "Bananas",
+        "nom": "Banana",
         "preu": 0.85,
         "descripcio": "The banana, also known as plantain, ripe banana, guineo, cambur or gualele, is an edible fruit of several types of large herbaceous plants of the genus Musa. These large plants that look like small trees are called banana trees, banana trees, banana trees, plantains or banana trees.",
         "imatge": "../public/bananas.jpg"
@@ -33,11 +33,5 @@
         "preu": 0.5,
         "descripcio": "Pears are fruits produced and consumed around the world, growing on a tree and harvested in late summer into mid-autumn. The pear tree and shrub are a species of genus Pyrus /ˈpaɪrəs/, in the family Rosaceae, bearing the pomaceous fruit of the same name. Several species of pears are valued for their edible fruit and juices, while others are cultivated as trees.",
         "imatge": "../public/pears.jpg"
-    },
-    {
-        "id": 6,
-        "nom": "Maracuya",
-        "preu": "0,7",
-        "descripcio": "Exotic fruit"
     }
 ]

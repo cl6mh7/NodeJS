@@ -11,14 +11,13 @@
             <%- include('partials/header'); %>
         </header>
         
-        <form method="post" action="" enctype="multipart/form-data">
-            <p>Editar Producto:</p>
-            <div class="formRow">Esborrar el producte amb ID: <%= infoFruit.id %>
+        <form method="post" action="/actionDelete?id=<%= infoFruit.id %>" enctype="multipart/form-data">
+            <div class="formRow">Esborrar el producte amb ID: <%= infoFruit.id %>?
         </div>
             
             <div class="formRow">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value="<%= infoFruit.nom %>" required>
+                <input type="" id="nombre" name="nombre" value="<%= infoFruit.nom %>" required>
             </div>
             
             <div class="formRow">
@@ -37,7 +36,7 @@
             </div>
             
             <div class="formRow">
-                <input type="submit" value="Guardar Cambios">
+                <button type="submit">Borrar</button>
             </div>
         </form>
     </div>
