@@ -1,47 +1,49 @@
-/* CSS modificado para hacer que el contenido se vea un 30% más grande y sin barras de desplazamiento */
-html, body {
-    font-family: "Open Sans", sans-serif;
-    margin: 0;
-    user-select: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-size: 19px;
-  }
-  
-  .formulari {
-    background-color: rgb(199, 222, 230);
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    max-width: 100%; /* Ancho máximo del formulario */
-    padding: 40px;
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-  }
-  
-  p {
-    text-align: center;
-  }
-  
-  header {
-    text-align: center;
-  }
-  
-  .formRow {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    max-width: 300px;
-  }
-  
-  .formRow:first-child {
-    margin-top: 25px;
-  }
-  
-  .formRow:last-child {
-    justify-content: flex-end;
-  }
-  
+.formulari {
+  background-color: rgb(199, 222, 230);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  max-width: 50%;
+  padding: 20px;
+}
+
+h3{
+  padding-top: 5%;
+  text-align: center;
+}
+header{
+  text-align: center;
+
+}
+header a{
+  padding-left: 5%;
+}
+p {
+  text-align: center;
+}
+.formRow {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  max-width: 300px;
+}
+
+.formRow:first-child {
+  margin-top: 25px;
+}
+
+.formRow:last-child {
+  justify-content: flex-end;
+}

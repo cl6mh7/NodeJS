@@ -1,37 +1,37 @@
 [
     {
         "id": 1,
-        "nom": "Banana",
-        "preu": 0.85,
-        "descripcio": "The banana, also known as plantain, ripe banana, guineo, cambur or gualele, is an edible fruit of several types of large herbaceous plants of the genus Musa. These large plants that look like small trees are called banana trees, banana trees, banana trees, plantains or banana trees.",
-        "imatge": "../public/bananas.jpg"
+        "nom": "T-shirts",
+        "preu": 7,
+        "descripcio": " is a style of fabric shirt named after the T shape of its body and sleeves",
+        "imatge": "../public/tshirt.jpeg"
     },
     {
         "id": 2,
-        "nom": "Cherries",
-        "preu": 0.8,
-        "descripcio": "A cherry is the fruit of many plants of the genus Prunus, and is a fleshy drupe (stone fruit).",
-        "imatge": "../public/cherries.png"
+        "nom": "Trousers",
+        "preu": 15,
+        "descripcio": " are an item of clothing worn from the waist to anywhere between the knees and the ankles, covering both legs separately.",
+        "imatge": "../public/trousers.jpeg"
     },
     {
         "id": 3,
-        "nom": "Apples",
-        "preu": 0.7,
-        "descripcio": "An apple is a round, edible fruit produced by an apple tree (Malus domestica). Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus. The tree originated in Central Asia, where its wild ancestor, Malus sieversii, is still found.",
-        "imatge": "../public/apples.jpeg"
+        "nom": "Caps",
+        "preu": 10,
+        "descripcio": "a kind of soft, flat hat, typically with a peak",
+        "imatge": "../public/cap.jpg"
     },
     {
         "id": 4,
-        "nom": "Cherimoya",
-        "preu": 0.9,
-        "descripcio": "The cherimoya (Annona cherimola), also spelled chirimoya and called chirimuya by the Inca people, is a species of edible fruit-bearing plant in the genus Annona, from the family Annonaceae, which includes the closely related sweetsop and soursop.",
-        "imatge": "../public/cherimoya.png"
+        "nom": "Shoes",
+        "preu": 20,
+        "descripcio": "a covering for the foot, typically made of leather, having a sturdy sole and not reaching above the ankle",
+        "imatge": "../public/shoes.jpeg"
     },
     {
         "id": 5,
-        "nom": "Pears",
-        "preu": 0.5,
-        "descripcio": "Pears are fruits produced and consumed around the world, growing on a tree and harvested in late summer into mid-autumn. The pear tree and shrub are a species of genus Pyrus /ˈpaɪrəs/, in the family Rosaceae, bearing the pomaceous fruit of the same name. Several species of pears are valued for their edible fruit and juices, while others are cultivated as trees.",
-        "imatge": "../public/pears.jpg"
+        "nom": "Socks",
+        "preu": 5,
+        "descripcio": "a piece of clothing worn on the feet and often covering the ankle or some part of the calf.",
+        "imatge": "../public/socks.jpeg"
     }
 ]

@@ -5,14 +5,16 @@
 </head>
 <body>
     <div class = "formulari">
+        <div class="hd"> 
         <header >
             <%- include('partials/header'); %>
         </header>
-        <h3>Lista de Productos</h3>
+    </div>
+        <h3>Llista de Productes</h3>
         <form action="edit.ejs" method="get">
         <ul>
             <% products.forEach(products => { %>
-                <li><a href="/edit?id=<%= products.id %>"><%= products.id %>- <%= products.nom %></a></li>
+                <li><a href="/edit?id=<%= products.id %>"><%= products.id %>- <%= products.nom %></a></li><hr>
             <% }); %>
         </ul>
     </form>

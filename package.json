@@ -1,14 +1,15 @@
 {
-  "name": "proyecte",
+  "name": "botiga",
   "version": "1.0.0",
-  "description": "AWS2-MPDUAL UF4 NodeJS 23-24 | Proyecte.",
+  "description": "PR4.1 Botiga"
+  ,
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "development": "nodemon ./app.js",
     "app": "forever ./app.js"
   },
-  "author": "Claudia Moyano Herrerias",
+  "author": "Henry Doudo Caicedo",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.9",

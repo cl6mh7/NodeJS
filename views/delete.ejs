@@ -11,28 +11,23 @@
             <%- include('partials/header'); %>
         </header>
         
-        <form method="post" action="/actionDelete?id=<%= infoFruit.id %>" enctype="multipart/form-data">
-            <div class="formRow">Esborrar el producte amb ID: <%= infoFruit.id %>?
+        <form method="post" action="/actionDelete?id=<%= infoClothes.id %>" enctype="multipart/form-data">
+            <div class="formRow"><b><b style="color: red;">ADVERTENCIA</b>: Estas segur que vols esborrar el producte amb ID: <%= infoClothes.id %>?</b>
         </div>
             
             <div class="formRow">
-                <label for="nombre">Nombre:</label>
-                <input type="" id="nombre" name="nombre" value="<%= infoFruit.nom %>" required>
+                <label for="nombre">Nom:</label>
+                <input type="" id="nombre" name="nombre" value="<%= infoClothes.nom %>" required>
             </div>
             
             <div class="formRow">
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" name="descripcion" required><%= infoFruit.descripcio %></textarea>
+                <label for="descripcion">Descripció:</label>
+                <textarea id="descripcion" name="descripcion" required><%= infoClothes.descripcio %></textarea>
             </div>
             
             <div class="formRow">
-                <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" name="imagen">
-            </div>
-            
-            <div class="formRow">
-                <label for="precio">Precio:</label>
-                <input type="text" id="precio" name="precio" value="<%= infoFruit.preu %>" required>
+                <label for="precio">Preu:</label>
+                <input type="text" id="precio" name="precio" value="<%= infoClothes.preu %>" required>
             </div>
             
             <div class="formRow">

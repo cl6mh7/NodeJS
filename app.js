@@ -15,7 +15,6 @@ app.set("views", __dirname + "/views");
 //?
 app.use(express.static("public"));
 
-//-------RUTAS---------------------------------
 
 // Ruta para la página de inicio
 app.get("/", async (req, res) => {
@@ -31,10 +30,8 @@ app.get("/", async (req, res) => {
         (products) => products.id === id
       );
     }
-
     // Ordenar la lista de productos por ID
     filteredProducts.sort((a, b) => a.id - b.id);
-
     res.render("inici.ejs", { products: filteredProducts });
   } catch (error) {
     console.error(error);
@@ -47,7 +44,7 @@ app.get("/add", (req, res) => {
   res.render("add.ejs");
 });
 
-//Añade un
+//Ruta para la acción de añadir un producto
 app.post("/actionAdd", upload.array("files"), addItem);
 async function addItem(req, res) {
   let arxiu = "./private/productes.json";
@@ -56,7 +53,6 @@ async function addItem(req, res) {
     // Llegir el fitxer JSON
     let dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
     let dades = JSON.parse(dadesArxiu);
-
     // Guardem la imatge a la carpeta 'public' amb un nom únic.
     if (postData.files && postData.files.length > 0) {
       let fileObj = postData.files[0];
@@ -64,10 +60,8 @@ async function addItem(req, res) {
       const fileExtension = fileObj.name.split(".").pop();
       let filePath = `./public/${uniqueID}.${fileExtension}`;
       await fs.writeFile(filePath, fileObj.content);
-
       // Guardem el nom de l'arxiu a la propietat 'imatge' de l'objecte.
       postData.imatge = filePath;
-
       // Eliminem el camp 'files' perquè no es guardi al JSON.
       delete postData.files;
     }
@@ -82,53 +76,49 @@ async function addItem(req, res) {
   }
 }
 
-// Retornar una pàgina dinàmica de item /actionEdit
+// Ruta per a la pagina d' edit segons la id de la URL
 app.get("/edit", getItem);
 async function getItem(req, res) {
   let arxiu = "./private/productes.json";
   let dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
   let dades = JSON.parse(dadesArxiu);
-  let query = url.parse(req.url, true).query;
-  
+  let query = url.parse(req.url, true).query; 
   // Buscar el producto por id
-  let infoFruit = dades.find((fruit) => fruit.id == query.id);
-  console.log("Consola -------->"+ infoFruit);
-
-  if (infoFruit) {
+  let infoClothes = dades.find((fruit) => fruit.id == query.id);
+  console.log("Consola -------->" + infoClothes);
+  if (infoClothes) {
     // Retornar la página según el producto encontrado
-    res.render("edit.ejs", { id: query.id, infoFruit });
+    res.render("edit.ejs", { id: query.id, infoClothes });
   } else {
     res.send("Parámetros incorrectos");
   }
 }
 
+//Ruta per l' acció d' editar un producte segons l' id de la URL
 app.post("/actionEdit", upload.array("files"), async (req, res) => {
   try {
     const postData = await getPostObject(req);
-    const id = postData.id; // Obtener el ID del producto desde el formulario
-    // Leer los datos actuales de los productos desde el archivo JSON
+    const id = postData.id; // Obtenir l' ID del productr desde el formulari
+    // Llegir les dades actuals dels productes desde l' arxiu JSON
     const arxiu = "./private/productes.json";
     const dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
     const dades = JSON.parse(dadesArxiu);
     let query = url.parse(req.url, true).query;
 
-    // Buscar el producto por id
-    let infoFruit = dades.find((fruit) => fruit.id == query.id);
-    if (!infoFruit) {
-      // Redirigir al usuario a la página de inicio si el producto no se encuentra
-      res.status(404).send('ID no encontrado en la base de datos');
+    // Buscar el producte per id
+    let infoClothes = dades.find((pice) => pice.id == query.id);
+    if (!infoClothes) {
+      // Mostrar error si no es troba l' ID
+      res.status(404).send("ID no encontrado en la base de datos");
       return;
     }
-
-    // Actualizar los datos del producto con los datos del formulario
-    infoFruit.nom = postData.nombre || infoFruit.nom;
-    infoFruit.preu = postData.precio || infoFruit.preu;
-    infoFruit.descripcio = postData.descripcion || infoFruit.descripcio;
-
-    // Guardar la lista actualizada de productos en el archivo JSON
+    // Actualitzar les dades del producte amb les dades del formulari
+    infoClothes.nom = postData.nombre || infoClothes.nom;
+    infoClothes.preu = postData.precio || infoClothes.preu;
+    infoClothes.descripcio = postData.descripcion || infoClothes.descripcio;
+    // Guardar la llista actualizada dels productes en l'arxiu JSON
     await fs.writeFile(arxiu, JSON.stringify(dades, null, 4), "utf8");
-
-    // Redirigir al usuario a la página de inicio (inici.ejs) después de editar
+    // Redirigir al usuari a la página de inici després de editar
     res.redirect("/");
   } catch (error) {
     console.error(error);
@@ -136,7 +126,7 @@ app.post("/actionEdit", upload.array("files"), async (req, res) => {
   }
 });
 
-// Ruta para la confirmación de borrado
+// Ruta per la pagina de esborrar
 app.get("/delete", getDeleteConfirmation);
 async function getDeleteConfirmation(req, res) {
   try {
@@ -144,48 +134,47 @@ async function getDeleteConfirmation(req, res) {
     const arxiu = "./private/productes.json";
     const dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
     const dades = JSON.parse(dadesArxiu);
-    console.log("Consola ------> " + dades)
-    const infoFruit = dades.find((fruit) => fruit.id == id);
-    
+    console.log("Consola ------> " + dades);
+    const infoClothes = dades.find((pice) => pice.id == id);
 
-    if (infoFruit) {
-      // Renderiza la vista de confirmación de borrado con los datos del producto
-      res.render("delete.ejs", { id, infoFruit });
+    if (infoClothes) {
+      // Renderitza la vista de confirmació de esborrat amb les dades del producte
+      res.render("delete.ejs", { id, infoClothes });
     } else {
-      res.send("Producto no encontrado");
+      res.send("Producte no trobat");
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error interno del servidor");
+    res.status(500).send("Error intern del servidor");
   }
 }
 
-// Ruta para la acción de eliminación de un producto
+// Ruta per l' acción de eliminació de un producte
 app.post("/actionDelete", deleteProduct);
 async function deleteProduct(req, res) {
   try {
-    const { id } = req.query; // Obtener el ID del producto desde la consulta URL (?id=X)
+    const { id } = req.query; // Obtenir l' ID del producte desde la consulta URL (?id=X)
 
-    // Leer el archivo JSON de productos
+    // Llegir l' arxiu JSON de productes
     const data = await fs.readFile("./private/productes.json", "utf-8");
     const products = JSON.parse(data);
     console.log("Consola actionDelete ------>" + products);
 
-    // Buscar el índice del producto por ID
+    // Buscar l' índex del producte per ID
     const productIndex = products.findIndex((product) => product.id == id);
 
     if (productIndex >= 0) {
-      // Eliminar el producto encontrando por su índice
+      // Eliminar el producte trobat pel seu índex
       products.splice(productIndex, 1);
 
-      // Guardar la lista actualizada de productos en el archivo JSON
+      // Guardar la llista actualitzada de productes en l' arxiu JSON
       await fs.writeFile(
         "./private/productes.json",
         JSON.stringify(products, null, 4),
         "utf8"
       );
 
-      // Redirigir al usuario a la página de inicio después de borrar
+      // Redirigir a l' usuari a la página de inici despres de esborrar
       res.redirect("/");
     } else {
       res.send("Producto no encontrado");
@@ -195,8 +184,6 @@ async function deleteProduct(req, res) {
     res.status(500).send("Error interno del servidor");
   }
 }
-
-
 
 async function getPostObject(req) {
   return new Promise(async (resolve, reject) => {
@@ -230,7 +217,7 @@ async function getPostObject(req) {
   });
 }
 
-// Ruta para la acción de edición de un producto
+// Ruta para l' acció d' edició d' un producte
 app.get("/item", getItemForItemRoute);
 async function getItemForItemRoute(req, res) {
   let dades = {};
